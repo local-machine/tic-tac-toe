@@ -15,7 +15,7 @@ A two-player online tic-tac-toe game
 ### Specs
 | Spec | Input | Output |
 | :-------------     | :------------- | :------------- |
-| **Takes user names and assigns O and X** | "Jess" | Name: Jess, Symbol: O |
+| **First user to click on the grid is Player X** | clicks grid | Symbol: O |
 | **Marks 1 square upon user selection** | Mark square (1, 1) | Square: 1, 1; Symbol: O |
 | **Marks 2 squares upon user selection** | Mark squares (1,1) and (2,2) | Squares: 1, 1 and 2, 2; Symbol: O |
 | **Announces winner and terminates when user marks 3 squares in a row** | Mark 3 squares in a row | winner = true; "Jess wins!" |
