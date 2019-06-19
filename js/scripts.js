@@ -26,13 +26,18 @@ var currentPlayer = playerX;
 
 // User Interface Logic
 
+// TRY USING UNIQUE IDs
+
 $(function(){
+  for (var id = 1; id <= 9; id++) {
+    $("#id").click
+  }
   $("#11").click(function(){
     square11.symbol = currentPlayer.symbol
     alert(square11.symbol);
   })
-  $("#11").click(function(){
-    square11.symbol = currentPlayer.symbol
-    alert(square11.symbol);
+  $("#12").click(function(){
+    square12.symbol = currentPlayer.symbol
+    alert(square12.symbol);
   })
 })
