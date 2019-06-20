@@ -3,41 +3,43 @@ function Player (symbol){
   this.symbol = symbol;
 }
 
-var playerX = new Player("X");
-var playerO = new Player("O");
-
 function Square (row, column){
   this.row = row;
   this.column = column;
   this.symbol;
 }
 
-var square11 = new Square("1","1")
-var square12 = new Square("1","2")
-var square13 = new Square("1","3")
-var square21 = new Square("2","1")
-var square22 = new Square("2","2")
-var square23 = new Square("2","3")
-var square31 = new Square("3","1")
-var square32 = new Square("3","2")
-var square33 = new Square("3","3")
+Square.prototype.mark = function (player) {
+  this.symbol = player.symbol;
+}
+
+var playerX = new Player("X");
+var playerO = new Player("O");
 
 var currentPlayer = playerX;
 
+var squares = [];
+
+for (var row = 1; row <= 3; row++) {
+  for (var col = 1; col <= 3; col++) {
+    var newSquare = new Square (row, col);
+    squares.push(newSquare);
+  }
+}
+var markSquare = function(uniqueId){
+  squares.forEach(function(square){
+    if (uniqueId == squares.indexOf(square)){
+      square.mark(currentPlayer);
+    } else {
+      return;
+    }
+  });
+}
 // User Interface Logic
 
-// TRY USING UNIQUE IDs
-
 $(function(){
-  for (var id = 1; id <= 9; id++) {
-    $("#id").click
-  }
-  $("#11").click(function(){
-    square11.symbol = currentPlayer.symbol
-    alert(square11.symbol);
+  $(".grid-item").click(function(){
+    var uniqueId = $(this).prop('id');
+    markSquare(uniqueId);
   })
-  $("#12").click(function(){
-    square12.symbol = currentPlayer.symbol
-    alert(square12.symbol);
-  })
-})
+});
