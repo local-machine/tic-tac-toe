@@ -50,31 +50,15 @@ var winCombos = [
 
 var determineWin = function() {
   for (var i = 0; i <= 7; i++) {
-    if (squares[winCombos[i][0]].symbol === squares[winCombos[i][1]].symbol && squares[winCombos[i][1]].symbol === squares[winCombos[i][2]].symbol) {
-      winner = true;
-    } else {
-      return;
+    var symbol1 = (squares[winCombos[i][0]]).symbol;
+    var symbol2 = (squares[winCombos[i][1]]).symbol;
+    if ((symbol1 && symbol2) && (symbol1 === symbol2)){ // if two squares have the same symbol
+      var symbol3 = (squares[winCombos[i][2]]).symbol;
+      if (symbol3 && (symbol2 === symbol3)) { // compare 3rd square for the same symbol
+        return winner = true;
+      }
     }
   }
-  // if (squares[0].symbol === squares[4].symbol && squares[4].symbol === squares[8].symbol) {
-  //   winner = true;
-  // } else if (squares[2].symbol === squares[4].symbol && squares[4].symbol === squares[6].symbol) {
-  //   winner = true;
-  // } else if (squares[0].symbol === squares[1].symbol && squares[1].symbol === squares[2].symbol) {
-  //   winner = true;
-  // } else if (squares[3].symbol === squares[4].symbol && squares[4].symbol === squares[5].symbol) {
-  //   winner = true;
-  // } else if (squares[6].symbol === squares[7].symbol && squares[7].symbol === squares[8].symbol) {
-  //   winner = true;
-  // } else if (squares[0].symbol === squares[3].symbol && squares[3].symbol === squares[6].symbol) {
-  //   winner = true;
-  // } else if (squares[1].symbol === squares[4].symbol && squares[4].symbol === squares[7].symbol) {
-  //   winner = true;
-  // } else if (squares[2].symbol === squares[5].symbol && squares[5].symbol === squares[8].symbol) {
-  //   winner = true;
-  // } else {
-  //   winner = false;
-  // }
 }
 
 
@@ -82,7 +66,7 @@ var determineWin = function() {
 
 $(function(){
   $(".grid-item").click(function(){
-    debugger;
+    // debugger;
     var clickedSqId = $(this).prop("id");
     markSquare(clickedSqId);
     determineWin();
