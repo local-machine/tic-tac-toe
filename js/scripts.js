@@ -1,8 +1,9 @@
 // Business Logic ---------------------
 var winner = false;
 
-function Player (symbol){
+function Player (symbol, name){
   this.symbol = symbol;
+  this.name = name;
 }
 
 function Square (row, column){
@@ -15,8 +16,8 @@ Square.prototype.mark = function (player) {
   this.symbol = player.symbol;
 }
 
-var playerX = new Player("X");
-var playerO = new Player("O");
+var playerX = new Player("X", "Player X");
+var playerO = new Player("O" ,"Player O");
 var currentPlayer = playerX;
 
 var squares = [];    // Creates array of 9 Square objects w/ row and col
@@ -69,16 +70,24 @@ var switchPlayer = function(){    // Switches to other user upon passing turn
   }
 }
 
+
 // User Interface Logic --------------------
 
 $(function(){
   $(".grid-item").click(function(){
-    // debugger;
-    var clickedSqId = $(this).prop("id");
-    markSquare(clickedSqId);
-    determineWin();
-    switchPlayer();
+    var clickedSqId = parseInt($(this).prop("id"));
+    var symbolPresent = (squares[clickedSqId]).symbol;
+    if (symbolPresent === "X" || symbolPresent === "O") {
+      return;
+    } else {
+      markSquare(clickedSqId);
+      $("#" + clickedSqId).text(currentPlayer.symbol);
+      determineWin();
+      switchPlayer();
+      if (winner === true) {
+        switchPlayer();
+        alert(currentPlayer.name + " wins!!!!")
+      }
+    }
   })
-
-  //somewhere
 });
