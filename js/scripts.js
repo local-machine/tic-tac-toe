@@ -1,4 +1,6 @@
-// Business Logic
+// Business Logic ---------------------
+var winner = false;
+
 function Player (symbol){
   this.symbol = symbol;
 }
@@ -15,31 +17,57 @@ Square.prototype.mark = function (player) {
 
 var playerX = new Player("X");
 var playerO = new Player("O");
-
 var currentPlayer = playerX;
 
-var squares = [];
-
+var squares = [];    // Creates array of 9 Square objects w/ row and col
 for (var row = 1; row <= 3; row++) {
   for (var col = 1; col <= 3; col++) {
     var newSquare = new Square (row, col);
     squares.push(newSquare);
   }
 }
-var markSquare = function(uniqueId){
+
+var markSquare = function(clickedSqId){    // Marks clicked square with current player's symbol
   squares.forEach(function(square){
-    if (uniqueId == squares.indexOf(square)){
+    if (clickedSqId == squares.indexOf(square)){
       square.mark(currentPlayer);
     } else {
       return;
     }
   });
 }
-// User Interface Logic
+
+var determineWin = function() {
+  if (squares[0].symbol === squares[4].symbol && squares[4].symbol === squares[8].symbol) {
+    winner = true;
+  } else if (squares[2].symbol === squares[4].symbol && squares[4].symbol === squares[6].symbol) {
+    winner = true;
+  } else if (squares[0].symbol === squares[1].symbol && squares[1].symbol === squares[2].symbol) {
+    winner = true;
+  } else if (squares[3].symbol === squares[4].symbol && squares[4].symbol === squares[5].symbol) {
+    winner = true;
+  } else if (squares[6].symbol === squares[7].symbol && squares[7].symbol === squares[8].symbol) {
+    winner = true;
+  } else if (squares[0].symbol === squares[3].symbol && squares[3].symbol === squares[6].symbol) {
+    winner = true;
+  } else if (squares[1].symbol === squares[4].symbol && squares[4].symbol === squares[7].symbol) {
+    winner = true;
+  } else if (squares[2].symbol === squares[5].symbol && squares[5].symbol === squares[8].symbol) {
+    winner = true;
+  } else {
+    winner = false;
+  }
+}
+
+
+// User Interface Logic --------------------
 
 $(function(){
   $(".grid-item").click(function(){
-    var uniqueId = $(this).prop('id');
-    markSquare(uniqueId);
+    var clickedSqId = $(this).prop("id");
+    markSquare(clickedSqId);
   })
+
+  //somewhere
+  determineWin();
 });
