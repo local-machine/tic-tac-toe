@@ -61,6 +61,13 @@ var determineWin = function() {
   }
 }
 
+var switchPlayer = function(){    // Switches to other user upon passing turn
+  if (currentPlayer === playerX){
+    currentPlayer = playerO;
+  } else {
+    currentPlayer = playerX;
+  }
+}
 
 // User Interface Logic --------------------
 
@@ -70,6 +77,7 @@ $(function(){
     var clickedSqId = $(this).prop("id");
     markSquare(clickedSqId);
     determineWin();
+    switchPlayer();
   })
 
   //somewhere
